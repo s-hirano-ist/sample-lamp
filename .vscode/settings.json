@@ -1,0 +1,10 @@
+{
+    "cSpell.words": [
+        "birthyear",
+        "intelephense",
+        "staffcode",
+        "VARCHAR",
+        "zipcode"
+    ],
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+}
