@@ -23,7 +23,7 @@ if (isset($_SESSION['login']) == false) {
     <?php
     try {
 
-        require_once('../common/common.php');
+        require_once('../common/sanitize.php');
         $post = sanitize($_POST);
         $staff_name = $post['name'];
         $staff_pass = $post['pass'];

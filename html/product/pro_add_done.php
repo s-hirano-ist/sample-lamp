@@ -22,7 +22,7 @@ if (isset($_SESSION['login']) == false) {
 <body>
 	<?php
 	try {
-		require_once('../common/common.php');
+		require_once('../common/sanitize.php');
 		$post = sanitize($_POST);
 		$pro_name = $post['name'];
 		$pro_price = $post['price'];

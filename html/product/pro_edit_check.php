@@ -21,7 +21,7 @@ if (isset($_SESSION['login']) == false) {
 
 <body>
 	<?php
-	require_once('../common/common.php');
+	require_once('../common/sanitize.php');
 	$post = sanitize($_POST);
 	$pro_code = $post['code'];
 	$pro_name = $post['name'];
