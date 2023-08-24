@@ -11,7 +11,7 @@
 
 	require_once('../common/day.php');
 	$seireki = $_POST['seireki'];
-	$wareki = gengo($seireki);
+	$wareki = era_name($seireki);
 	print $wareki;
 	?>
 </body>
