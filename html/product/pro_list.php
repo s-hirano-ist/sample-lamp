@@ -16,15 +16,17 @@ if (isset($_SESSION['login']) == false) {
 
 <head>
 	<meta charset="UTF-8">
-	<title> sample title</title>
+	<title> Sample website</title>
 </head>
 
 <body>
 	<?php
 	try {
 		require_once('../common/database.php');
+		$dbh = connectToDatabase();
+
 		$sql = 'SELECT code,name,price FROM mst_product WHERE 1';
-		$stmt = executeSql($sql);
+		$stmt = executeSql($sql, $dbh);
 
 		print '商品一覧<br /><br />';
 

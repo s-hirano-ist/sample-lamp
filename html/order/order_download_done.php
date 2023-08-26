@@ -17,7 +17,7 @@ if (isset($_SESSION['login']) == false) {
 
 <head>
 	<meta charset="UTF-8">
-	<title>sample title</title>
+	<title>sample website</title>
 </head>
 
 <body>

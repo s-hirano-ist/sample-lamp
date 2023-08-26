@@ -3,6 +3,7 @@
         "birthyear",
         "ERRMODE",
         "intelephense",
+        "SJIS",
         "staffcode",
         "VARCHAR",
         "zipcode"

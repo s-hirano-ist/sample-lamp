@@ -7,7 +7,7 @@ session_regenerate_id(true);
 
 <head>
 	<meta charset="UTF-8">
-	<title>sample title</title>
+	<title>Sample website</title>
 </head>
 
 <body>
