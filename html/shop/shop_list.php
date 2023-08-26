@@ -39,7 +39,7 @@ if (isset($_SESSION['member_login']) == false) {
 			if ($rec == false) {
 				break;
 			}
-			print '<a href="shop_product.php?procode=' . $rec['code'] . '">'; #TODO: .$の仕組み
+			print '<a href="shop_product.php?procode=' . $rec['code'] . '">';
 			print $rec['name'] . '---';
 			print $rec['price'] . '円';
 			print '</a>';
