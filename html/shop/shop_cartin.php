@@ -29,7 +29,7 @@ if (isset($_SESSION['member_login']) == false) {
 
 		if (isset($_SESSION['cart']) == true) {
 			$cart = $_SESSION['cart'];
-			$kazu = $_SESSION['kazu'];
+			$amount = $_SESSION['amount'];
 
 			if (in_array($pro_code, $cart) == true) {
 				print 'その商品はすでにカートに入っています。<br />';
@@ -38,10 +38,10 @@ if (isset($_SESSION['member_login']) == false) {
 			}
 		}
 		$cart[] = $pro_code;
-		$kazu[] = 1;
+		$amount[] = 1;
 
 		$_SESSION['cart'] = $cart;
-		$_SESSION['kazu'] = $kazu;
+		$_SESSION['amount'] = $amount;
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
 		exit();

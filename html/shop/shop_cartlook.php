@@ -31,7 +31,7 @@ if (isset($_SESSION['member_login']) == false) {
 		if (isset($_SESSION['cart']) == true) {
 
 			$cart = $_SESSION['cart'];
-			$kazu = $_SESSION['kazu'];
+			$amount = $_SESSION['amount'];
 			$max = count($cart);
 		} else {
 			$max = 0;
@@ -72,7 +72,7 @@ if (isset($_SESSION['member_login']) == false) {
 	カートの中身
 	<br />
 	<br />
-	<form method="post" action="kazu_change.php">
+	<form method="post" action="amount_change.php">
 		<table border="1">
 			<tr>
 				<td>商品</td>
@@ -88,8 +88,8 @@ if (isset($_SESSION['member_login']) == false) {
 					<td><?php print $pro_name[$i]; ?></td>
 					<td><?php print $pro_gazou[$i]; ?></td>
 					<td><?php print $pro_price[$i]; ?>円</td>
-					<td><input type="text" name="kazu<?php print $i; ?>" value="<?php print $kazu[$i]; ?>"></td>
-					<td><?php print $pro_price[$i] * $kazu[$i]; ?>円</td>
+					<td><input type="text" name="amount<?php print $i; ?>" value="<?php print $amount[$i]; ?>"></td>
+					<td><?php print $pro_price[$i] * $amount[$i]; ?>円</td>
 					<td><input type="checkbox" name="sakujo<?php print $i; ?>"></td>
 				</tr>
 			<?php

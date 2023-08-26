@@ -46,7 +46,7 @@ if (isset($_SESSION['member_login']) == false) {
 		$honbun .= "--------------------\n";
 
 		$cart = $_SESSION['cart'];
-		$kazu = $_SESSION['kazu'];
+		$amount = $_SESSION['amount'];
 		$max = count($cart);
 
 		require_once('../common/database.php');
@@ -62,7 +62,7 @@ if (isset($_SESSION['member_login']) == false) {
 			$name = $rec['name'];
 			$price = $rec['price'];
 			$kakaku[] = $price;
-			$suryo = $kazu[$i];
+			$suryo = $amount[$i];
 			$shokei = $price * $suryo;
 
 			$honbun .= $name . ' ';
@@ -97,7 +97,7 @@ if (isset($_SESSION['member_login']) == false) {
 			$data[] = $lastcode;
 			$data[] = $cart[$i];
 			$data[] = $kakaku[$i];
-			$data[] = $kazu[$i];
+			$data[] = $amount[$i];
 			$stmt = executeSqlWithData($sql, $dbh, $data);
 		}
 
