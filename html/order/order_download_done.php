@@ -94,9 +94,8 @@ sales.code=sales_detail.code_sales
 			$csv .= "\n";
 		}
 
-		// print nl2br($csv);
-		// TODO: random file name for output csv files
-		$file = fopen('./csv/order.csv', 'w');
+		$random_file_name = uniqid();
+		$file = fopen('./csv/' . $random_file_name . '.csv', 'w');
 		// $csv = mb_convert_encoding($csv, 'SJIS', 'UTF-8');
 		fputs($file, $csv);
 		fclose($file);
@@ -104,10 +103,8 @@ sales.code=sales_detail.code_sales
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
 		exit();
 	}
-
 	?>
-
-	<a href="csv/order.csv">注文データのダウンロード</a>
+	<?php print '<a href="csv/' . $random_file_name . '.csv">注文データのダウンロード</a>' ?>
 	<br />
 	<br />
 	<a href="order_download.php">日付選択へ</a>
