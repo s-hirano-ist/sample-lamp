@@ -25,13 +25,13 @@ if (isset($_SESSION['member_login']) == false) {
 
 		$post = sanitize($_POST);
 
-		$onamae = $post['onamae'];
+		$name = $post['name'];
 		$email = $post['email'];
 		$zipcode = $post['zipcode'];
 		$address = $post['address'];
 		$tel = $post['tel'];
 
-		print $onamae . '様<br />';
+		print $name . '様<br />';
 		print 'ご注文ありがとうござました。<br />';
 		print $email . 'にメールを送りましたのでご確認ください。<br />';
 		print '商品は以下の住所に発送させていただきます。<br />';
@@ -40,7 +40,7 @@ if (isset($_SESSION['member_login']) == false) {
 		print $tel . '<br />';
 
 		$honbun = '';
-		$honbun .= $onamae . "様\n\nこのたびはご注文ありがとうございました。\n";
+		$honbun .= $name . "様\n\nこのたびはご注文ありがとうございました。\n";
 		$honbun .= "\n";
 		$honbun .= "ご注文商品\n";
 		$honbun .= "--------------------\n";
@@ -79,7 +79,7 @@ if (isset($_SESSION['member_login']) == false) {
 		$sql = 'INSERT INTO sales (code_member,name,email,zipcode,address,tel) VALUES (?,?,?,?,?,?)';
 		$data = array();
 		$data[] = $lastmembercode;
-		$data[] = $onamae;
+		$data[] = $name;
 		$data[] = $email;
 		$data[] = $zipcode;
 		$data[] = $address;

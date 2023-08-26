@@ -31,14 +31,14 @@ if (isset($_SESSION['member_login']) == false) {
 
 	$dbh = null;
 
-	$onamae = $rec['name'];
+	$name = $rec['name'];
 	$email = $rec['email'];
 	$zipcode = $rec['zipcode'];
 	$address = $rec['address'];
 	$tel = $rec['tel'];
 
 	print 'お名前<br />';
-	print $onamae;
+	print $name;
 	print '<br /><br />';
 
 	print 'メールアドレス<br />';
@@ -58,7 +58,7 @@ if (isset($_SESSION['member_login']) == false) {
 	print '<br /><br />';
 
 	print '<form method="post" action="shop_kantan_done.php">';
-	print '<input type="hidden" name="onamae" value="' . $onamae . '">';
+	print '<input type="hidden" name="name" value="' . $name . '">';
 	print '<input type="hidden" name="email" value="' . $email . '">';
 	print '<input type="hidden" name="zipcode" value="' . $zipcode . '">';
 	print '<input type="hidden" name="address" value="' . $address . '">';

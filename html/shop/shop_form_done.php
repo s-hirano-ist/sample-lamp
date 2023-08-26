@@ -19,18 +19,18 @@ session_regenerate_id(true);
 
 		$post = sanitize($_POST);
 
-		$onamae = $post['onamae'];
+		$name = $post['name'];
 		$email = $post['email'];
 		$postal1 = $post['postal1'];
 		$postal2 = $post['postal2'];
 		$address = $post['address'];
 		$tel = $post['tel'];
-		$chumon = $post['chumon'];
+		$order = $post['order'];
 		$pass = $post['pass'];
 		$danjo = $post['danjo'];
 		$birth = $post['birth'];
 
-		print $onamae . '様<br />';
+		print $name . '様<br />';
 		print 'ご注文ありがとうござました。<br />';
 		print $email . 'にメールを送りましたのでご確認ください。<br />';
 		print '商品は以下の住所に発送させていただきます。<br />';
@@ -39,7 +39,7 @@ session_regenerate_id(true);
 		print $tel . '<br />';
 
 		$honbun = '';
-		$honbun .= $onamae . "様\n\nこのたびはご注文ありがとうございました。\n";
+		$honbun .= $name . "様\n\nこのたびはご注文ありがとうございました。\n";
 		$honbun .= "\n";
 		$honbun .= "ご注文商品\n";
 		$honbun .= "--------------------\n";
@@ -77,11 +77,11 @@ session_regenerate_id(true);
 		$zipcode = $postal1 . $postal2; // FIXME: one variable
 
 		$lastmembercode = 0;
-		if ($chumon == 'chumontouroku') {
+		if ($order == 'order_register') {
 			$sql = 'INSERT INTO member (password,name,email,zipcode,address,tel,sex,birthyear) VALUES (?,?,?,?,?,?,?,?)';
 			$data = array();
 			$data[] = md5($pass);
-			$data[] = $onamae;
+			$data[] = $name;
 			$data[] = $email;
 			$data[] = $zipcode;
 			$data[] = $address;
@@ -103,7 +103,7 @@ session_regenerate_id(true);
 		$sql = 'INSERT INTO sales (code_member,name,email,zipcode,address,tel) VALUES (?,?,?,?,?,?)';
 		$data = array();
 		$data[] = $lastmembercode;
-		$data[] = $onamae;
+		$data[] = $name;
 		$data[] = $email;
 		$data[] = $zipcode;
 		$data[] = $address;
@@ -132,7 +132,7 @@ session_regenerate_id(true);
 		$dbh = null;
 
 
-		if ($chumon == 'chumontouroku') {
+		if ($order == 'order_register') {
 			print '会員登録が完了いたしました。<br />';
 			print '次回からメールアドレスとパスワードでログインしてください。<br />';
 			print 'ご注文が簡単にできるようになります。<br />';
@@ -147,7 +147,7 @@ session_regenerate_id(true);
 		$honbun .= "入金確認が取れ次第、梱包、発送させていただきます。\n";
 		$honbun .= "\n";
 
-		if ($chumon == 'chumontouroku') {
+		if ($order == 'order_register') {
 			$honbun .= "会員登録が完了いたしました。\n";
 			$honbun .= "次回からメールアドレスとパスワードでログインしてください。\n";
 			$honbun .= "ご注文が簡単にできるようになります。\n";

@@ -14,13 +14,13 @@
 
 	$post = sanitize($_POST);
 
-	$onamae = $post['onamae'];
+	$name = $post['name'];
 	$email = $post['email'];
 	$postal1 = $post['postal1'];
 	$postal2 = $post['postal2'];
 	$address = $post['address'];
 	$tel = $post['tel'];
-	$chumon = $post['chumon'];
+	$order = $post['order'];
 	$pass = $post['pass'];
 	$pass2 = $post['pass2'];
 	$danjo = $post['danjo'];
@@ -28,12 +28,12 @@
 
 	$okflg = true;
 
-	if ($onamae == '') {
+	if ($name == '') {
 		print 'お名前が入力されていません。<br /><br />';
 		$okflg = false;
 	} else {
 		print 'お名前<br />';
-		print $onamae;
+		print $name;
 		print '<br /><br />';
 	}
 
@@ -81,7 +81,7 @@
 	}
 
 
-	if ($chumon == 'chumontouroku') {
+	if ($order == 'order_register') {
 		if ($pass == '') {
 			print 'パスワードが入力されていません。<br /><br />';
 			$okflg = false;
@@ -108,13 +108,13 @@
 
 	if ($okflg == true) {
 		print '<form method="post" action="shop_form_done.php">';
-		print '<input type="hidden" name="onamae" value="' . $onamae . '">';
+		print '<input type="hidden" name="name" value="' . $name . '">';
 		print '<input type="hidden" name="email" value="' . $email . '">';
 		print '<input type="hidden" name="postal1" value="' . $postal1 . '">';
 		print '<input type="hidden" name="postal2" value="' . $postal2 . '">';
 		print '<input type="hidden" name="address" value="' . $address . '">';
 		print '<input type="hidden" name="tel" value="' . $tel . '">';
-		print '<input type="hidden" name="chumon" value="' . $chumon . '">';
+		print '<input type="hidden" name="order" value="' . $order . '">';
 		print '<input type="hidden" name="pass" value="' . $pass . '">';
 		print '<input type="hidden" name="danjo" value="' . $danjo . '">';
 		print '<input type="hidden" name="birth" value="' . $birth . '">';
