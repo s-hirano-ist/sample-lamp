@@ -16,8 +16,8 @@
 
 	$name = $post['name'];
 	$email = $post['email'];
-	$postal1 = $post['postal1'];
-	$postal2 = $post['postal2'];
+	$zipcode1 = $post['zipcode1'];
+	$zipcode2 = $post['zipcode2'];
 	$address = $post['address'];
 	$tel = $post['tel'];
 	$order = $post['order'];
@@ -46,18 +46,18 @@
 		print '<br /><br />';
 	}
 
-	if (preg_match('/\A[0-9]+\z/', $postal1) == 0) {
+	if (preg_match('/\A[0-9]+\z/', $zipcode1) == 0) {
 		print '郵便番号は半角数字で入力してください。<br /><br />';
 		$okflg = false;
 	} else {
 		print '郵便番号<br />';
-		print $postal1;
+		print $zipcode1;
 		print '-';
-		print $postal2;
+		print $zipcode2;
 		print '<br /><br />';
 	}
 
-	if (preg_match('/\A[0-9]+\z/', $postal2) == 0) {
+	if (preg_match('/\A[0-9]+\z/', $zipcode2) == 0) {
 		print '郵便番号は半角数字で入力してください。<br /><br />';
 		$okflg = false;
 	}
@@ -110,8 +110,8 @@
 		print '<form method="post" action="shop_form_done.php">';
 		print '<input type="hidden" name="name" value="' . $name . '">';
 		print '<input type="hidden" name="email" value="' . $email . '">';
-		print '<input type="hidden" name="postal1" value="' . $postal1 . '">';
-		print '<input type="hidden" name="postal2" value="' . $postal2 . '">';
+		print '<input type="hidden" name="zipcode1" value="' . $zipcode1 . '">';
+		print '<input type="hidden" name="zipcode2" value="' . $zipcode2 . '">';
 		print '<input type="hidden" name="address" value="' . $address . '">';
 		print '<input type="hidden" name="tel" value="' . $tel . '">';
 		print '<input type="hidden" name="order" value="' . $order . '">';

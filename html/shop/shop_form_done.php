@@ -21,8 +21,8 @@ session_regenerate_id(true);
 
 		$name = $post['name'];
 		$email = $post['email'];
-		$postal1 = $post['postal1'];
-		$postal2 = $post['postal2'];
+		$zipcode1 = $post['zipcode1'];
+		$zipcode2 = $post['zipcode2'];
 		$address = $post['address'];
 		$tel = $post['tel'];
 		$order = $post['order'];
@@ -34,7 +34,7 @@ session_regenerate_id(true);
 		print 'ご注文ありがとうござました。<br />';
 		print $email . 'にメールを送りましたのでご確認ください。<br />';
 		print '商品は以下の住所に発送させていただきます。<br />';
-		print $postal1 . '-' . $postal2 . '<br />';
+		print $zipcode1 . '-' . $zipcode2 . '<br />';
 		print $address . '<br />';
 		print $tel . '<br />';
 
@@ -74,7 +74,7 @@ session_regenerate_id(true);
 		$sql = 'LOCK TABLES sales WRITE,sales_detail WRITE,member WRITE';
 		$stmt = executeSql($sql, $dbh);
 
-		$zipcode = $postal1 . $postal2; // FIXME: one variable
+		$zipcode = $zipcode1 . $zipcode2;
 
 		$lastmembercode = 0;
 		if ($order == 'order_register') {
