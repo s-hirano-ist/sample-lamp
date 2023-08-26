@@ -24,16 +24,12 @@ if (isset($_SESSION['login']) == false) {
 	try {
 		$pro_code = $_GET['procode'];
 
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		$sql = 'SELECT name,gazou FROM mst_product WHERE code=?';
-		$stmt = $dbh->prepare($sql);
 		$data[] = $pro_code;
-		$stmt->execute($data);
+		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$pro_name = $rec['name'];

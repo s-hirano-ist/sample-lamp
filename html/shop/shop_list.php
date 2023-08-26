@@ -25,16 +25,11 @@ if (isset($_SESSION['member_login']) == false) {
 <body>
 	<?php
 	try {
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		$sql = 'SELECT code,name,price FROM mst_product WHERE 1';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
-
+		$stmt = executeSql($sql, $dbh);
 		$dbh = null;
 
 		print '商品一覧<br /><br />';

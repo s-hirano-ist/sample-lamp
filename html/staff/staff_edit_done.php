@@ -29,24 +29,18 @@ if (isset($_SESSION['login']) == false) {
         $staff_name = $post['name'];
         $staff_pass = $post['pass'];
 
-        $dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-        # FIXME: change to secure settings (Note that dbname is not localhost in docker)
-        $user = 'root';
-        $password = 'Soraki!1234';
-        $dbh = new PDO($dsn, $user, $password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require_once('../common/database.php');
+        $dbh = connectToDatabase();
+
 
         $sql = 'UPDATE mst_staff SET name=?, password=? WHERE code=?';
-        $stmt = $dbh->prepare($sql);
-
         $data[] = $staff_name;
         $data[] = $staff_pass;
         $data[] = $staff_code;
-        $stmt->execute($data);
+        $stmt = executeSqlWithData($sql, $dbh, $data);
 
         $dbh = null;
     } catch (Exception $e) {
-        print $e;
         print 'ただいま障害により大変ご迷惑をお掛けしております。';
         exit();
     }

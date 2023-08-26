@@ -21,16 +21,12 @@ if (isset($_SESSION['member_login']) == false) {
 	<?php
 	$code = $_SESSION['member_code'];
 
-	$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-	$user = 'root';
-	$password = 'Soraki!1234';
-	$dbh = new PDO($dsn, $user, $password);
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	require_once('../common/database.php');
+	$dbh = connectToDatabase();
 
 	$sql = 'SELECT name,email,zipcode,address,tel FROM member WHERE code=?';
-	$stmt = $dbh->prepare($sql);
 	$data[] = $code;
-	$stmt->execute($data);
+	$stmt = executeSqlWithData($sql, $dbh, $data);
 	$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	$dbh = null;

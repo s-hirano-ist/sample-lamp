@@ -10,17 +10,13 @@ try {
 
 	$member_pass = md5($member_pass);
 
-	$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-	$user = 'root';
-	$password = 'Soraki!1234';
-	$dbh = new PDO($dsn, $user, $password);
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	require_once('../common/database.php');
+	$dbh = connectToDatabase();
 
 	$sql = 'SELECT code,name FROM member WHERE email=? AND password=?';
-	$stmt = $dbh->prepare($sql);
 	$data[] = $member_email;
 	$data[] = $member_pass;
-	$stmt->execute($data);
+	$stmt = executeSqlWithData($sql, $dbh, $data);
 
 	$dbh = null;
 

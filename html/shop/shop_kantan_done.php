@@ -49,17 +49,13 @@ if (isset($_SESSION['member_login']) == false) {
 		$kazu = $_SESSION['kazu'];
 		$max = count($cart);
 
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		for ($i = 0; $i < $max; $i++) {
 			$sql = 'SELECT name,price FROM mst_product WHERE code=?';
-			$stmt = $dbh->prepare($sql);
 			$data[0] = $cart[$i];
-			$stmt->execute($data);
+			$stmt = executeSqlWithData($sql, $dbh, $data);
 
 			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -76,13 +72,11 @@ if (isset($_SESSION['member_login']) == false) {
 		}
 
 		$sql = 'LOCK TABLES sales WRITE,sales_detail WRITE';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
+		$stmt = executeSql($sql, $dbh);
 
 		$lastmembercode = $_SESSION['member_code'];
 
 		$sql = 'INSERT INTO sales (code_member,name,email,zipcode,address,tel) VALUES (?,?,?,?,?,?)';
-		$stmt = $dbh->prepare($sql);
 		$data = array();
 		$data[] = $lastmembercode;
 		$data[] = $onamae;
@@ -90,41 +84,37 @@ if (isset($_SESSION['member_login']) == false) {
 		$data[] = $zipcode;
 		$data[] = $address;
 		$data[] = $tel;
-		$stmt->execute($data);
+		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$sql = 'SELECT LAST_INSERT_ID()';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
+		$stmt = executeSql($sql, $dbh);
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$lastcode = $rec['LAST_INSERT_ID()'];
 
 		for ($i = 0; $i < $max; $i++) {
 			$sql = 'INSERT INTO sales_detail (code_sales,code_product,price,quantity) VALUES (?,?,?,?)';
-			$stmt = $dbh->prepare($sql);
 			$data = array();
 			$data[] = $lastcode;
 			$data[] = $cart[$i];
 			$data[] = $kakaku[$i];
 			$data[] = $kazu[$i];
-			$stmt->execute($data);
+			$stmt = executeSqlWithData($sql, $dbh, $data);
 		}
 
 		$sql = 'UNLOCK TABLES';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
-
+		$stmt = executeSql($sql, $dbh);
 		$dbh = null;
 
 		$honbun .= "送料は無料です。\n";
 		$honbun .= "--------------------\n";
 		$honbun .= "\n";
 		$honbun .= "代金は以下の口座にお振込ください。\n";
-		$honbun .= "ろくまる銀行 やさい支店 普通口座 １２３４５６７\n";
+		$honbun .= "ろくまる銀行 やさい支店 普通口座 1234567\n";
 		$honbun .= "入金確認が取れ次第、梱包、発送させていただきます。\n";
 		$honbun .= "\n";
 
 		$honbun .= "□□□□□□□□□□□□□□\n";
-		$honbun .= "　～安心野菜のろくまる農園～\n";
+		$honbun .= " ～安心野菜のろくまる農園～\n";
 		$honbun .= "\n";
 		$honbun .= "○○県六丸郡六丸村123-4\n";
 		$honbun .= "電話 090-6060-xxxx\n";

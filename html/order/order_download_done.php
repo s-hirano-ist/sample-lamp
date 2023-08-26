@@ -29,13 +29,8 @@ if (isset($_SESSION['login']) == false) {
 		$year = $_POST['year'];
 		$month = $_POST['month'];
 		$day = $_POST['day'];
-
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 		$sql = '
 SELECT
 	sales.code,
@@ -59,11 +54,10 @@ sales.code=sales_detail.code_sales
 	AND substr(sales.date,6,2)=?
 	AND substr(sales.date,9,2)=?
 ';
-		$stmt = $dbh->prepare($sql);
 		$data[] = $year;
 		$data[] = $month;
 		$data[] = $day;
-		$stmt->execute($data);
+		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$dbh = null;
 

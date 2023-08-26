@@ -43,17 +43,13 @@ if (isset($_SESSION['member_login']) == false) {
 			exit();
 		}
 
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		foreach ($cart as $key => $val) {
 			$sql = 'SELECT code,name,price,gazou FROM mst_product WHERE code=?';
-			$stmt = $dbh->prepare($sql);
 			$data[0] = $val;
-			$stmt->execute($data);
+			$stmt = executeSqlWithData($sql, $dbh, $data);
 
 			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
