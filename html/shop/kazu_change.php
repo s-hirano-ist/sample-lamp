@@ -2,7 +2,7 @@
 session_start();
 session_regenerate_id(true);
 
-require_once('../common/common.php');
+require_once('../common/sanitize.php');
 
 $post = sanitize($_POST);
 

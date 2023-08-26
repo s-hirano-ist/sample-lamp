@@ -1,0 +1,14 @@
+{
+    "name": "s-hirano-ist/php_sample",
+    "description": "Sample php project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Soraki Hirano"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "*"
+    }
+}

@@ -1,3 +1,4 @@
 .env
 html/product/gazou/
-html/order/csv
+html/order/csv/
+html/vendor/

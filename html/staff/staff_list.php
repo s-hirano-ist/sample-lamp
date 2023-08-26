@@ -22,16 +22,12 @@ if (isset($_SESSION['login']) == false) {
 <body>
     <?php
     try {
-        $dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-        # FIXME: change to secure settings (Note that dbname is not localhost in docker)
-        $user = 'root';
-        $password = 'Soraki!1234';
-        $dbh = new PDO($dsn, $user, $password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require_once('../common/database.php');
+        $dbh = connectToDatabase();
+
 
         $sql = 'SELECT code, name FROM mst_staff WHERE 1';
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
+        $stmt = executeSql($sql, $dbh);
 
         $dbh = null;
 

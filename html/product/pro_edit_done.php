@@ -22,7 +22,7 @@ if (isset($_SESSION['login']) == false) {
 <body>
 	<?php
 	try {
-		require_once('../common/common.php');
+		require_once('../common/sanitize.php');
 		$post = sanitize($_POST);
 		$pro_code = $post['code'];
 		$pro_name = $post['name'];
@@ -30,19 +30,15 @@ if (isset($_SESSION['login']) == false) {
 		$pro_gazou_name_old = $post['gazou_name_old'];
 		$pro_gazou_name = $post['gazou_name'];
 
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		$sql = 'UPDATE mst_product SET name=?,price=?,gazou=? WHERE code=?';
-		$stmt = $dbh->prepare($sql);
 		$data[] = $pro_name;
 		$data[] = $pro_price;
 		$data[] = $pro_gazou_name;
 		$data[] = $pro_code;
-		$stmt->execute($data);
+		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$dbh = null;
 

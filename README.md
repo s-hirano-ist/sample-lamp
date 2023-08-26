@@ -1,15 +1,47 @@
-# sample PHP project
+# Sample PHP Project
 
-## 技術スタック
+## Tech Stack
 
-|           |              |
-|-----------|--------------|
-|Language   | PHP 7.2      |
-|Web server | Apache 2     |
-|Database   | mysql 5.7    |
-|Formatter  | intelephense |
+|                   |              |
+|-------------------|--------------|
+|Language           | [PHP 7.2](https://www.php.net/)|
+|Web server         | [Apache httpd](https://httpd.apache.org/)|
+|Database           | [MySQL 5.7](https://www.mysql.com/)|
+|Formatter          | [intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)|
+|Dependency Manager | [Composer](https://getcomposer.org/)|
 
-## 実行
+## Initial Setups
+
+1. git clone
+
+```bash
+git clone https://github.com/s-hirano-ist/php_sample
+```
+
+2. install composer
+
+```bash
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
+
+REF: https://getcomposer.org/download/
+
+3. install packages
+
+```bash
+composer install
+```
+
+4. docker compose up
+
+```bash
+docker compose up --build -d
+```
+
+## Command Log
 
 ```bash
 touch .env # set envs
@@ -73,13 +105,4 @@ tel VARCHAR(13),
 sex INT,
 birthyear INT
 );
-```
-
-## 便利集
-
-配列の中身を画面に出力。
-
-```php
-var_dump($cart);
-exit();
 ```

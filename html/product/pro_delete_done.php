@@ -25,17 +25,12 @@ if (isset($_SESSION['login']) == false) {
 		$pro_code = $_POST['code'];
 		$pro_gazou_name = $_POST['gazou_name'];
 
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		$sql = 'DELETE FROM mst_product WHERE code=?';
-		$stmt = $dbh->prepare($sql);
 		$data[] = $pro_code;
-		$stmt->execute($data);
-
+		$stmt = executeSqlWithData($sql, $sql, $data);
 		$dbh = null;
 
 		if ($pro_gazou_name != "") {

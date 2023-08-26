@@ -15,7 +15,7 @@ session_regenerate_id(true);
 	<?php
 
 	try {
-		require_once('../common/common.php');
+		require_once('../common/sanitize.php');
 
 		$post = sanitize($_POST);
 
@@ -48,17 +48,13 @@ session_regenerate_id(true);
 		$kazu = $_SESSION['kazu'];
 		$max = count($cart);
 
-		$dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-		$user = 'root';
-		$password = 'Soraki!1234';
-		$dbh = new PDO($dsn, $user, $password);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		require_once('../common/database.php');
+		$dbh = connectToDatabase();
 
 		for ($i = 0; $i < $max; $i++) {
 			$sql = 'SELECT name,price FROM mst_product WHERE code=?';
-			$stmt = $dbh->prepare($sql);
 			$data[0] = $cart[$i];
-			$stmt->execute($data);
+			$stmt = executeSqlWithData($sql, $dbh, $data);
 
 			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -76,15 +72,13 @@ session_regenerate_id(true);
 
 
 		$sql = 'LOCK TABLES sales WRITE,sales_detail WRITE,member WRITE';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
+		$stmt = executeSql($sql, $dbh);
 
 		$zipcode = $postal1 . $postal2; // FIXME: one variable
 
 		$lastmembercode = 0;
 		if ($chumon == 'chumontouroku') {
 			$sql = 'INSERT INTO member (password,name,email,zipcode,address,tel,sex,birthyear) VALUES (?,?,?,?,?,?,?,?)';
-			$stmt = $dbh->prepare($sql);
 			$data = array();
 			$data[] = md5($pass);
 			$data[] = $onamae;
@@ -98,17 +92,15 @@ session_regenerate_id(true);
 				$data[] = 2;
 			}
 			$data[] = $birth;
-			$stmt->execute($data);
+			$stmt = executeSqlWithData($sql, $dbh, $data);
 
 			$sql = 'SELECT LAST_INSERT_ID()';
-			$stmt = $dbh->prepare($sql);
-			$stmt->execute();
+			$stmt = executeSql($sql, $dbh);
 			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 			$lastmembercode = $rec['LAST_INSERT_ID()'];
 		}
 
 		$sql = 'INSERT INTO sales (code_member,name,email,zipcode,address,tel) VALUES (?,?,?,?,?,?)';
-		$stmt = $dbh->prepare($sql);
 		$data = array();
 		$data[] = $lastmembercode;
 		$data[] = $onamae;
@@ -116,29 +108,26 @@ session_regenerate_id(true);
 		$data[] = $zipcode;
 		$data[] = $address;
 		$data[] = $tel;
-		$stmt->execute($data);
+		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$sql = 'SELECT LAST_INSERT_ID()';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
+		$stmt = executeSql($sql, $dbh);
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$lastcode = $rec['LAST_INSERT_ID()'];
 
 
 		for ($i = 0; $i < $max; $i++) {
 			$sql = 'INSERT INTO sales_detail (code_sales,code_product,price,quantity) VALUES (?,?,?,?)';
-			$stmt = $dbh->prepare($sql);
 			$data = array();
 			$data[] = $lastcode;
 			$data[] = $cart[$i];
 			$data[] = $kakaku[$i];
 			$data[] = $kazu[$i];
-			$stmt->execute($data);
+			$stmt = executeSqlWithData($sql, $dbh, $data);
 		}
 
 		$sql = 'UNLOCK TABLES';
-		$stmt = $dbh->prepare($sql);
-		$stmt->execute();
+		$stmt = executeSql($sql, $dbh);
 
 		$dbh = null;
 

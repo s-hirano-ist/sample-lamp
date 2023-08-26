@@ -23,24 +23,18 @@ if (isset($_SESSION['login']) == false) {
     <?php
     try {
 
-        require_once('../common/common.php');
+        require_once('../common/sanitize.php');
         $post = sanitize($_POST);
         $staff_name = $post['name'];
         $staff_pass = $post['pass'];
 
-        $dsn = 'mysql:dbname=sample-db;host=mysql;charset=utf8';
-        # FIXME: change to secure settings (Note that dbname is not localhost in docker)
-        $user = 'root';
-        $password = 'Soraki!1234';
-        $dbh = new PDO($dsn, $user, $password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require_once('../common/database.php');
+        $dbh = connectToDatabase();
 
         $sql = 'INSERT INTO mst_staff(name, password) VALUES (?,?)';
-        $stmt = $dbh->prepare($sql);
-
         $data[] = $staff_name;
         $data[] = $staff_pass;
-        $stmt->execute($data);
+        $stmt = executeSqlWithData($sql, $dbh, $data);
 
         $dbh = null;
 

@@ -23,7 +23,7 @@ if (isset($_SESSION['login']) == false) {
 <body>
 
 	<?php
-	require_once('../common/common.php');
+	require_once('../common/day.php');
 	?>
 	ダウンロードしたい注文日を選んでください。
 	<br />
