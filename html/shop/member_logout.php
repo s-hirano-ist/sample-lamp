@@ -12,12 +12,13 @@ session_destroy();
 
 <head>
 	<meta charset="UTF-8">
-	<title>sample title</title>
+	<title>Sample website</title>
 </head>
 
 <body>
 
-	ログアウトしました。<br />
+	ログアウトしました。
+	<br />
 	<br />
 	<a href="shop_list.php">商品一覧へ</a>
 
