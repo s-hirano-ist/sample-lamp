@@ -17,7 +17,8 @@ session_destroy();
 
 <body>
 
-	ログアウトしました。<br />
+	ログアウトしました。
+	<br />
 	<br />
 	<a href="shop_list.php">商品一覧へ</a>
 
