@@ -1,24 +1,22 @@
 # Sample PHP Project
 
-## Tech Stack
+## 💻 Tech Stack
 
-|                   |              |
-|-------------------|--------------|
-|Language           | [PHP 7.2](https://www.php.net/)|
-|Web server         | [Apache httpd](https://httpd.apache.org/)|
-|Database           | [MySQL 5.7](https://www.mysql.com/)|
-|Formatter          | [intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)|
-|Dependency Manager | [Composer](https://getcomposer.org/)|
+**Language** - [PHP 7.2](https://www.php.net/)  
+**Web server** - [Apache httpd](https://httpd.apache.org/)  
+**Database** - [MySQL 5.7](https://www.mysql.com/)  
+**Formatter** - [intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)  
+**Dependency Manager** - [Composer](https://getcomposer.org/)
 
-## Initial Setups
+## 🧞 Initial Setups
 
-1. git clone
+1. Git clone
 
 ```bash
 git clone https://github.com/s-hirano-ist/php_sample
 ```
 
-2. install composer
+2. Install composer
 
 ```bash
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -29,19 +27,26 @@ php -r "unlink('composer-setup.php');"
 
 REF: https://getcomposer.org/download/
 
-3. install packages
+3. Install packages
 
 ```bash
 composer install
 ```
 
-4. docker compose up
+4. Set .env files. Samples are shown on .env.sample files.
+
+```bash
+touch .env
+touch html/.env
+```
+
+5. Docker compose up
 
 ```bash
 docker compose up --build -d
 ```
 
-## Command Log
+## 👌 Command Log
 
 ```bash
 touch .env # set envs
