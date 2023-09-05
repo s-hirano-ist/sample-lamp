@@ -26,16 +26,16 @@ if (isset($_SESSION['login']) == false) {
 		$post = sanitize($_POST);
 		$pro_name = $post['name'];
 		$pro_price = $post['price'];
-		$pro_gazou_name = $post['gazou_name'];
+		$pro_image_name = $post['image_name'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
 
 		# FIXME: スクリプト実行脆弱性あり https://blog.tokumaru.org/2014/01/php.html
-		$sql = 'INSERT INTO mst_product(name,price, gazou) VALUES (?,?,?)';
+		$sql = 'INSERT INTO mst_product(name,price, image_path) VALUES (?,?,?)';
 		$data[] = $pro_name;
 		$data[] = $pro_price;
-		$data[] = $pro_gazou_name;
+		$data[] = $pro_image_name;
 		$stmt = executeSqlWithData($sql, $dbh, $data);
 		$dbh = null;
 

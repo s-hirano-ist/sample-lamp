@@ -35,7 +35,7 @@ if (isset($_SESSION['login']) == false) {
         <br />
         画像を選んでください。
         <br />
-        <input type="file" name="gazou" style="width:400px">
+        <input type="file" name="image" style="width:400px">
         <br />
         <br />
         <input type="button" onclick="history.back()" value="戻る">

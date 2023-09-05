@@ -57,7 +57,7 @@ if (isset($_SESSION['member_login']) == false) {
 	print $tel;
 	print '<br /><br />';
 
-	print '<form method="post" action="shop_kantan_done.php">';
+	print '<form method="post" action="shop_easy_done.php">';
 	print '<input type="hidden" name="name" value="' . $name . '">';
 	print '<input type="hidden" name="email" value="' . $email . '">';
 	print '<input type="hidden" name="zipcode" value="' . $zipcode . '">';

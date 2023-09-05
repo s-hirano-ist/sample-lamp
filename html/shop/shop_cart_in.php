@@ -25,7 +25,7 @@ if (isset($_SESSION['member_login']) == false) {
 <body>
 	<?php
 	try {
-		$pro_code = $_GET['procode'];
+		$pro_code = $_GET['product_code'];
 
 		if (isset($_SESSION['cart']) == true) {
 			$cart = $_SESSION['cart'];

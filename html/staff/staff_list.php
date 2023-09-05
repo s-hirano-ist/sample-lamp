@@ -43,7 +43,7 @@ if (isset($_SESSION['login']) == false) {
             print $rec['name'];
             print '<br />';
         }
-        print '<input type="submit" name="disp" value="参照">';
+        print '<input type="submit" name="display" value="参照">';
         print '<input type="submit" name="add" value="追加">';
         print '<input type="submit" name="edit" value="修正">';
         print '<input type="submit" name="delete" value="削除">';

@@ -36,12 +36,12 @@ if (isset($_SESSION['login']) == false) {
 			if ($rec == false) {
 				break;
 			}
-			print '<input type="radio" name="procode" value="' . $rec['code'] . '">';
+			print '<input type="radio" name="product_code" value="' . $rec['code'] . '">';
 			print $rec['name'] . '---';
 			print $rec['price'] . '円';
 			print '<br />';
 		}
-		print '<input type="submit" name="disp" value="参照">';
+		print '<input type="submit" name="display" value="参照">';
 		print '<input type="submit" name="add" value="追加">';
 		print '<input type="submit" name="edit" value="修正">';
 		print '<input type="submit" name="delete" value="削除">';

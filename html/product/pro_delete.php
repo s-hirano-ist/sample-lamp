@@ -22,25 +22,25 @@ if (isset($_SESSION['login']) == false) {
 <body>
 	<?php
 	try {
-		$pro_code = $_GET['procode'];
+		$pro_code = $_GET['product_code'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
 
-		$sql = 'SELECT name,gazou FROM mst_product WHERE code=?';
+		$sql = 'SELECT name,image_path FROM mst_product WHERE code=?';
 		$data[] = $pro_code;
 		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$pro_name = $rec['name'];
-		$pro_gazou_name = $rec['gazou'];
+		$pro_image_name = $rec['image_path'];
 
 		$dbh = null;
 
-		if ($pro_gazou_name == "") {
-			$disp_gazou = "";
+		if ($pro_image_name == "") {
+			$show_image = "";
 		} else {
-			$disp_gazou = '<img src="./gazou/' . $pro_gazou_name . '">';
+			$show_image = '<img src="./image/' . $pro_image_name . '">';
 		}
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
@@ -59,14 +59,14 @@ if (isset($_SESSION['login']) == false) {
 	<br />
 	<?php print $pro_name; ?>
 	<br />
-	<?php print $disp_gazou ?>
+	<?php print $show_image ?>
 	<br />
 	この商品を削除してよろしいですか？
 	<br />
 	<br />
 	<form method="post" action="pro_delete_done.php">
 		<input type="hidden" name="code" value="<?php print $pro_code; ?>">
-		<input type="hidden" name="gazou_name" value="<?php print $pro_gazou_name; ?>">
+		<input type="hidden" name="image_name" value="<?php print $pro_image_name; ?>">
 		<input type="button" onclick="history.back()" value="戻る">
 		<input type="submit" value="OK">
 	</form>

@@ -23,14 +23,14 @@
 	$order = $post['order'];
 	$pass = $post['pass'];
 	$pass2 = $post['pass2'];
-	$danjo = $post['danjo'];
+	$sex = $post['sex'];
 	$birth = $post['birth'];
 
-	$okflg = true;
+	$is_ok = true;
 
 	if ($name == '') {
 		print 'お名前が入力されていません。<br /><br />';
-		$okflg = false;
+		$is_ok = false;
 	} else {
 		print 'お名前<br />';
 		print $name;
@@ -39,7 +39,7 @@
 
 	if (preg_match('/\A[\w\-\.]+\@[\w\-\.]+\.([a-z]+)\z/', $email) == 0) {
 		print 'メールアドレスを正確に入力してください。<br /><br />';
-		$okflg = false;
+		$is_ok = false;
 	} else {
 		print 'メールアドレス<br />';
 		print $email;
@@ -48,7 +48,7 @@
 
 	if (preg_match('/\A[0-9]+\z/', $zipcode1) == 0) {
 		print '郵便番号は半角数字で入力してください。<br /><br />';
-		$okflg = false;
+		$is_ok = false;
 	} else {
 		print '郵便番号<br />';
 		print $zipcode1;
@@ -59,12 +59,12 @@
 
 	if (preg_match('/\A[0-9]+\z/', $zipcode2) == 0) {
 		print '郵便番号は半角数字で入力してください。<br /><br />';
-		$okflg = false;
+		$is_ok = false;
 	}
 
 	if ($address == '') {
 		print '住所が入力されていません。<br /><br />';
-		$okflg = false;
+		$is_ok = false;
 	} else {
 		print '住所<br />';
 		print $address;
@@ -73,7 +73,7 @@
 
 	if (preg_match('/\A\d{2,5}-?\d{2,5}-?\d{4,5}\z/', $tel) == 0) {
 		print '電話番号を正確に入力してください。<br /><br />';
-		$okflg = false;
+		$is_ok = false;
 	} else {
 		print '電話番号<br />';
 		print $tel;
@@ -84,16 +84,16 @@
 	if ($order == 'order_register') {
 		if ($pass == '') {
 			print 'パスワードが入力されていません。<br /><br />';
-			$okflg = false;
+			$is_ok = false;
 		}
 
 		if ($pass != $pass2) {
 			print 'パスワードが一致しません。<br /><br />';
-			$okflg = false;
+			$is_ok = false;
 		}
 
 		print '性別<br />';
-		if ($danjo == 'dan') {
+		if ($sex == 'dan') {
 			print '男性';
 		} else {
 			print '女性';
@@ -106,7 +106,7 @@
 		print '<br /><br />';
 	}
 
-	if ($okflg == true) {
+	if ($is_ok == true) {
 		print '<form method="post" action="shop_form_done.php">';
 		print '<input type="hidden" name="name" value="' . $name . '">';
 		print '<input type="hidden" name="email" value="' . $email . '">';
@@ -116,7 +116,7 @@
 		print '<input type="hidden" name="tel" value="' . $tel . '">';
 		print '<input type="hidden" name="order" value="' . $order . '">';
 		print '<input type="hidden" name="pass" value="' . $pass . '">';
-		print '<input type="hidden" name="danjo" value="' . $danjo . '">';
+		print '<input type="hidden" name="sex" value="' . $sex . '">';
 		print '<input type="hidden" name="birth" value="' . $birth . '">';
 		print '<input type="button" onclick="history.back()" value="戻る">';
 		print '<input type="submit" value="OK"><br />';

@@ -22,26 +22,26 @@ if (isset($_SESSION['login']) == false) {
 <body>
 	<?php
 	try {
-		$pro_code = $_GET['procode'];
+		$pro_code = $_GET['product_code'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
 
-		$sql = 'SELECT name,price,gazou FROM mst_product WHERE code=?';
+		$sql = 'SELECT name,price,image_path FROM mst_product WHERE code=?';
 		$data[] = $pro_code;
 		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$pro_name = $rec['name'];
 		$pro_price = $rec['price'];
-		$pro_gazou_name = $rec['gazou'];
+		$pro_image_name = $rec['image_path'];
 
 		$dbh = null;
 
-		if ($pro_gazou_name == "") {
-			$disp_gazou = "";
+		if ($pro_image_name == "") {
+			$show_image = "";
 		} else {
-			$disp_gazou = '<img src="./gazou/' . $pro_gazou_name . '">';
+			$show_image = '<img src="./image/' . $pro_image_name . '">';
 		}
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
@@ -64,7 +64,7 @@ if (isset($_SESSION['login']) == false) {
 	<br />
 	<?php print $pro_price; ?>円
 	<br />
-	<?php print $disp_gazou; ?>
+	<?php print $show_image; ?>
 	<br />
 	<br />
 	<form>
