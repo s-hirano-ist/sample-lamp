@@ -58,8 +58,8 @@ cd html
 mkdir staff
 mkdir product
 cd product 
-mkdir gazou
-sudo chmod -R 777 gazou
+mkdir image
+sudo chmod -R 777 image
 ```
 
 ```sql
@@ -70,13 +70,13 @@ name VARCHAR(15),
 password VARCHAR(32)
 );
 
-INSERT INTO mst_staff (name,password) VALUES ("Taro Okamoto", "sample-password");
+INSERT INTO mst_staff (name,password) VALUES ("Taro Nippon", "sample-password");
 
 CREATE TABLE mst_product (
 code INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(30),
 price INT,
-gazou VARCHAR(30)
+image_path VARCHAR(30)
 );
 
 CREATE TABLE sales (

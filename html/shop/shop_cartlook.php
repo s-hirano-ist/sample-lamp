@@ -47,7 +47,7 @@ if (isset($_SESSION['member_login']) == false) {
 		$dbh = connectToDatabase();
 
 		foreach ($cart as $key => $val) {
-			$sql = 'SELECT code,name,price,gazou FROM mst_product WHERE code=?';
+			$sql = 'SELECT code,name,price,image_path FROM mst_product WHERE code=?';
 			$data[0] = $val;
 			$stmt = executeSqlWithData($sql, $dbh, $data);
 
@@ -55,10 +55,10 @@ if (isset($_SESSION['member_login']) == false) {
 
 			$pro_name[] = $rec['name'];
 			$pro_price[] = $rec['price'];
-			if ($rec['gazou'] == '') {
-				$pro_gazou[] = '';
+			if ($rec['image'] == '') {
+				$product_image[] = '';
 			} else {
-				$pro_gazou[] = '<img src="../product/gazou/' . $rec['gazou'] . '">';
+				$product_image[] = '<img src="../product/image/' . $rec['image'] . '">';
 			}
 		}
 		$dbh = null;
@@ -86,7 +86,7 @@ if (isset($_SESSION['member_login']) == false) {
 			?>
 				<tr>
 					<td><?php print $pro_name[$i]; ?></td>
-					<td><?php print $pro_gazou[$i]; ?></td>
+					<td><?php print $product_image[$i]; ?></td>
 					<td><?php print $pro_price[$i]; ?>円</td>
 					<td><input type="text" name="amount<?php print $i; ?>" value="<?php print $amount[$i]; ?>"></td>
 					<td><?php print $pro_price[$i] * $amount[$i]; ?>円</td>

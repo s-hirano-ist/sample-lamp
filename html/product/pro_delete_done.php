@@ -23,7 +23,7 @@ if (isset($_SESSION['login']) == false) {
 	<?php
 	try {
 		$pro_code = $_POST['code'];
-		$pro_gazou_name = $_POST['gazou_name'];
+		$pro_image_name = $_POST['image_name'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
@@ -33,8 +33,8 @@ if (isset($_SESSION['login']) == false) {
 		$stmt = executeSqlWithData($sql, $sql, $data);
 		$dbh = null;
 
-		if ($pro_gazou_name != "") {
-			unlink('./gazou/' . $pro_gazou_name);
+		if ($pro_image_name != "") {
+			unlink('./image/' . $pro_image_name);
 		}
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';

@@ -27,24 +27,24 @@ if (isset($_SESSION['login']) == false) {
 		$pro_code = $post['code'];
 		$pro_name = $post['name'];
 		$pro_price = $post['price'];
-		$pro_gazou_name_old = $post['gazou_name_old'];
-		$pro_gazou_name = $post['gazou_name'];
+		$pro_image_name_old = $post['image_name_old'];
+		$pro_image_name = $post['image_name'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
 
-		$sql = 'UPDATE mst_product SET name=?,price=?,gazou=? WHERE code=?';
+		$sql = 'UPDATE mst_product SET name=?,price=?,image_path=? WHERE code=?';
 		$data[] = $pro_name;
 		$data[] = $pro_price;
-		$data[] = $pro_gazou_name;
+		$data[] = $pro_image_name;
 		$data[] = $pro_code;
 		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$dbh = null;
 
-		if ($pro_gazou_name_old != $pro_gazou_name) {
-			if ($pro_gazou_name_old != '') {
-				unlink('./gazou/' . $pro_gazou_name_old);
+		if ($pro_image_name_old != $pro_image_name) {
+			if ($pro_image_name_old != '') {
+				unlink('./image/' . $pro_image_name_old);
 			}
 		}
 		print '修正しました。<br />';

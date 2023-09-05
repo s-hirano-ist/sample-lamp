@@ -30,21 +30,21 @@ if (isset($_SESSION['member_login']) == false) {
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
 
-		$sql = 'SELECT name,price,gazou FROM mst_product WHERE code=?';
+		$sql = 'SELECT name,price,image_path FROM mst_product WHERE code=?';
 		$data[] = $pro_code;
 		$stmt = executeSqlWithData($sql, $dbh, $data);
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$pro_name = $rec['name'];
 		$pro_price = $rec['price'];
-		$pro_gazou_name = $rec['gazou'];
+		$pro_image_name = $rec['image'];
 
 		$dbh = null;
 
-		if ($pro_gazou_name == '') {
-			$disp_gazou = '';
+		if ($pro_image_name == '') {
+			$show_image = '';
 		} else {
-			$disp_gazou = '<img src="../product/gazou/' . $pro_gazou_name . '">';
+			$show_image = '<img src="../product/image/' . $pro_image_name . '">';
 		}
 		print '<a href="shop_cartin.php?procode=' . $pro_code . '">カートに入れる</a><br /><br />';
 	} catch (Exception $e) {
@@ -65,7 +65,7 @@ if (isset($_SESSION['member_login']) == false) {
 	価格<br />
 	<?php print $pro_price; ?>円
 	<br />
-	<?php print $disp_gazou; ?>
+	<?php print $show_image; ?>
 	<br />
 	<br />
 	<form>

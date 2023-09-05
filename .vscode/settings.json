@@ -3,9 +3,11 @@
         "birthyear",
         "ERRMODE",
         "intelephense",
+        "phpdotenv",
         "SJIS",
         "staffcode",
         "VARCHAR",
+        "vlucas",
         "zipcode"
     ],
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
