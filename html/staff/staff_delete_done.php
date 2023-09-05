@@ -27,7 +27,7 @@ if (isset($_SESSION['login']) == false) {
         require_once('../common/database.php');
         $dbh = connectToDatabase();
 
-        # FIXME: CSRF脆弱性あり
+        // FIXME: CSRF脆弱性あり
         $sql = 'DELETE FROM mst_staff WHERE code=?';
         $data[] = $staff_code;
         $stmt = executeSqlWithData($sql, $dbh, $data);
