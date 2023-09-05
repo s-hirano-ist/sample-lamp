@@ -6,7 +6,6 @@ services:
     # restart: always
     volumes:
       - ./html:/var/www/html
-      - ./logs/php:/var/log/php
     ports:
       - 80:80
     depends_on:
@@ -16,7 +15,6 @@ services:
     container_name: mysql
     volumes:
       - db-store:/var/lib/mysql
-      - ./logs/mysql:/var/log/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d
     # restart: always
     ports:
@@ -26,6 +24,5 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${USER}
       - MYSQL_PASSWORD=${PASSWORD}
-
 volumes:
   db-store:
