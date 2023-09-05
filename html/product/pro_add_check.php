@@ -27,7 +27,7 @@ if (isset($_SESSION['login']) == false) {
 	$pro_price = $post['price'];
 
 	$product_image = $_FILES['image'];
-	# FIXME: HTMLエスケープ処理が抜けている 商品画像 ファイル名 XSS脆弱性
+	// FIXME: HTMLエスケープ処理が抜けている 商品画像 ファイル名 XSS脆弱性
 
 	if ($pro_name == '') {
 		print '商品名が入力されていません。<br />';

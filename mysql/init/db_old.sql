@@ -58,7 +58,7 @@ CREATE TABLE `mst_product` (
   `code` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
-  `gazou` varchar(30) DEFAULT NULL,
+  `image_path` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
