@@ -25,7 +25,7 @@ if (isset($_SESSION['member_login']) == false) {
 <body>
 	<?php
 	try {
-		$pro_code = $_GET['procode'];
+		$pro_code = $_GET['product_code'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
@@ -37,7 +37,7 @@ if (isset($_SESSION['member_login']) == false) {
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$pro_name = $rec['name'];
 		$pro_price = $rec['price'];
-		$pro_image_name = $rec['image'];
+		$pro_image_name = $rec['image_path'];
 
 		$dbh = null;
 
@@ -46,7 +46,7 @@ if (isset($_SESSION['member_login']) == false) {
 		} else {
 			$show_image = '<img src="../product/image/' . $pro_image_name . '">';
 		}
-		print '<a href="shop_cartin.php?procode=' . $pro_code . '">カートに入れる</a><br /><br />';
+		print '<a href="shop_cart_in.php?product_code=' . $pro_code . '">カートに入れる</a><br /><br />';
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
 		exit();

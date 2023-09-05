@@ -27,7 +27,7 @@ session_regenerate_id(true);
 		$tel = $post['tel'];
 		$order = $post['order'];
 		$pass = $post['pass'];
-		$danjo = $post['danjo'];
+		$sex = $post['sex'];
 		$birth = $post['birth'];
 
 		print $name . '様<br />';
@@ -38,11 +38,11 @@ session_regenerate_id(true);
 		print $address . '<br />';
 		print $tel . '<br />';
 
-		$honbun = '';
-		$honbun .= $name . "様\n\nこのたびはご注文ありがとうございました。\n";
-		$honbun .= "\n";
-		$honbun .= "ご注文商品\n";
-		$honbun .= "--------------------\n";
+		$main_text = '';
+		$main_text .= $name . "様\n\nこのたびはご注文ありがとうございました。\n";
+		$main_text .= "\n";
+		$main_text .= "ご注文商品\n";
+		$main_text .= "--------------------\n";
 
 		$cart = $_SESSION['cart'];
 		$amount = $_SESSION['amount'];
@@ -60,14 +60,14 @@ session_regenerate_id(true);
 
 			$name = $rec['name'];
 			$price = $rec['price'];
-			$kakaku[] = $price;
-			$suryo = $amount[$i];
-			$shokei = $price * $suryo;
+			$prices[] = $price;
+			$quantity = $amount[$i];
+			$total = $price * $quantity;
 
-			$honbun .= $name . ' ';
-			$honbun .= $price . '円 x ';
-			$honbun .= $suryo . '個 = ';
-			$honbun .= $shokei . "円\n";
+			$main_text .= $name . ' ';
+			$main_text .= $price . '円 x ';
+			$main_text .= $quantity . '個 = ';
+			$main_text .= $total . "円\n";
 		}
 
 
@@ -76,7 +76,7 @@ session_regenerate_id(true);
 
 		$zipcode = $zipcode1 . $zipcode2;
 
-		$lastmembercode = 0;
+		$last_member_code = 0;
 		if ($order == 'order_register') {
 			$sql = 'INSERT INTO member (password,name,email,zipcode,address,tel,sex,birthyear) VALUES (?,?,?,?,?,?,?,?)';
 			$data = array();
@@ -97,12 +97,12 @@ session_regenerate_id(true);
 			$sql = 'SELECT LAST_INSERT_ID()';
 			$stmt = executeSql($sql, $dbh);
 			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-			$lastmembercode = $rec['LAST_INSERT_ID()'];
+			$last_member_code = $rec['LAST_INSERT_ID()'];
 		}
 
 		$sql = 'INSERT INTO sales (code_member,name,email,zipcode,address,tel) VALUES (?,?,?,?,?,?)';
 		$data = array();
-		$data[] = $lastmembercode;
+		$data[] = $last_member_code;
 		$data[] = $name;
 		$data[] = $email;
 		$data[] = $zipcode;
@@ -113,15 +113,15 @@ session_regenerate_id(true);
 		$sql = 'SELECT LAST_INSERT_ID()';
 		$stmt = executeSql($sql, $dbh);
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
-		$lastcode = $rec['LAST_INSERT_ID()'];
+		$last_code = $rec['LAST_INSERT_ID()'];
 
 
 		for ($i = 0; $i < $max; $i++) {
 			$sql = 'INSERT INTO sales_detail (code_sales,code_product,price,quantity) VALUES (?,?,?,?)';
 			$data = array();
-			$data[] = $lastcode;
+			$data[] = $last_code;
 			$data[] = $cart[$i];
-			$data[] = $kakaku[$i];
+			$data[] = $prices[$i];
 			$data[] = $amount[$i];
 			$stmt = executeSqlWithData($sql, $dbh, $data);
 		}
@@ -139,46 +139,46 @@ session_regenerate_id(true);
 			print '<br />';
 		}
 
-		$honbun .= "送料は無料です。\n";
-		$honbun .= "--------------------\n";
-		$honbun .= "\n";
-		$honbun .= "代金は以下の口座にお振込ください。\n";
-		$honbun .= "ろくまる銀行 やさい支店 普通口座 1234567\n";
-		$honbun .= "入金確認が取れ次第、梱包、発送させていただきます。\n";
-		$honbun .= "\n";
+		$main_text .= "送料は無料です。\n";
+		$main_text .= "--------------------\n";
+		$main_text .= "\n";
+		$main_text .= "代金は以下の口座にお振込ください。\n";
+		$main_text .= "ろくまる銀行 やさい支店 普通口座 1234567\n";
+		$main_text .= "入金確認が取れ次第、梱包、発送させていただきます。\n";
+		$main_text .= "\n";
 
 		if ($order == 'order_register') {
-			$honbun .= "会員登録が完了いたしました。\n";
-			$honbun .= "次回からメールアドレスとパスワードでログインしてください。\n";
-			$honbun .= "ご注文が簡単にできるようになります。\n";
-			$honbun .= "\n";
+			$main_text .= "会員登録が完了いたしました。\n";
+			$main_text .= "次回からメールアドレスとパスワードでログインしてください。\n";
+			$main_text .= "ご注文が簡単にできるようになります。\n";
+			$main_text .= "\n";
 		}
 
-		$honbun .= "□□□□□□□□□□□□□□\n";
-		$honbun .= " ～安心野菜のろくまる農園～\n";
-		$honbun .= "\n";
-		$honbun .= "○○県六丸郡六丸村123-4\n";
-		$honbun .= "電話 090-6060-xxxx\n";
-		$honbun .= "メール info@rokumarunouen.co.jp\n";
-		$honbun .= "□□□□□□□□□□□□□□\n";
+		$main_text .= "□□□□□□□□□□□□□□\n";
+		$main_text .= " ～安心野菜のろくまる農園～\n";
+		$main_text .= "\n";
+		$main_text .= "○○県六丸郡六丸村123-4\n";
+		$main_text .= "電話 090-6060-xxxx\n";
+		$main_text .= "メール info@rokumarunouen.co.jp\n";
+		$main_text .= "□□□□□□□□□□□□□□\n";
 
 		print '<br />';
-		print nl2br($honbun);
+		print nl2br($main_text);
 		// MEMO: No need to send email
 		// FIXME: メールヘッダーインジェクション 改行チェックなしのため
 		// $title = 'ご注文ありがとうございます。';
 		// $header = 'From:info@rokumarunouen.co.jp';
-		// $honbun = html_entity_decode($honbun, ENT_QUOTES, 'UTF-8');
+		// $main_text = html_entity_decode($main_text, ENT_QUOTES, 'UTF-8');
 		// mb_language('Japanese');
 		// mb_internal_encoding('UTF-8');
-		// mb_send_mail($email, $title, $honbun, $header);
+		// mb_send_mail($email, $title, $main_text, $header);
 
 		// $title = 'お客様からご注文がありました。';
 		// $header = 'From:' . $email;
-		// $honbun = html_entity_decode($honbun, ENT_QUOTES, 'UTF-8');
+		// $main_text = html_entity_decode($main_text, ENT_QUOTES, 'UTF-8');
 		// mb_language('Japanese');
 		// mb_internal_encoding('UTF-8');
-		// mb_send_mail('info@rokumarunouen.co.jp', $title, $honbun, $header);
+		// mb_send_mail('info@rokumarunouen.co.jp', $title, $main_text, $header);
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
 		exit();

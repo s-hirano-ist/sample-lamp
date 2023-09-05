@@ -22,7 +22,7 @@ if (isset($_SESSION['login']) == false) {
 <body>
 	<?php
 	try {
-		$pro_code = $_GET['procode'];
+		$pro_code = $_GET['product_code'];
 
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
@@ -33,7 +33,7 @@ if (isset($_SESSION['login']) == false) {
 
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 		$pro_name = $rec['name'];
-		$pro_image_name = $rec['image'];
+		$pro_image_name = $rec['image_path'];
 
 		$dbh = null;
 

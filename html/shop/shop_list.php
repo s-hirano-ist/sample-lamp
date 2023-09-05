@@ -39,14 +39,14 @@ if (isset($_SESSION['member_login']) == false) {
 			if ($rec == false) {
 				break;
 			}
-			print '<a href="shop_product.php?procode=' . $rec['code'] . '">';
+			print '<a href="shop_product.php?product_code=' . $rec['code'] . '">';
 			print $rec['name'] . '---';
 			print $rec['price'] . '円';
 			print '</a>';
 			print '<br />';
 		}
 		print '<br />';
-		print '<a href="shop_cartlook.php">カートを見る</a><br />';
+		print '<a href="shop_cart_look.php">カートを見る</a><br />';
 	} catch (Exception $e) {
 		print 'ただいま障害により大変ご迷惑をお掛けしております。';
 		exit();

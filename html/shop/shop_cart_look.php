@@ -55,10 +55,10 @@ if (isset($_SESSION['member_login']) == false) {
 
 			$pro_name[] = $rec['name'];
 			$pro_price[] = $rec['price'];
-			if ($rec['image'] == '') {
+			if ($rec['image_path'] == '') {
 				$product_image[] = '';
 			} else {
-				$product_image[] = '<img src="../product/image/' . $rec['image'] . '">';
+				$product_image[] = '<img src="../product/image/' . $rec['image_path'] . '">';
 			}
 		}
 		$dbh = null;
@@ -90,7 +90,7 @@ if (isset($_SESSION['member_login']) == false) {
 					<td><?php print $pro_price[$i]; ?>円</td>
 					<td><input type="text" name="amount<?php print $i; ?>" value="<?php print $amount[$i]; ?>"></td>
 					<td><?php print $pro_price[$i] * $amount[$i]; ?>円</td>
-					<td><input type="checkbox" name="sakujo<?php print $i; ?>"></td>
+					<td><input type="checkbox" name="delete<?php print $i; ?>"></td>
 				</tr>
 			<?php
 			}
@@ -106,7 +106,7 @@ if (isset($_SESSION['member_login']) == false) {
 
 	<?php
 	if (isset($_SESSION["member_login"]) == true) {
-		print '<a href="shop_kantan_check.php">会員かんたん注文へ進む</a><br />';
+		print '<a href="shop_easy_check.php">会員かんたん注文へ進む</a><br />';
 	}
 	?>
 
