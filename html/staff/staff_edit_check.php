@@ -52,7 +52,6 @@ if (isset($_SESSION['login']) == false) {
         print '<form method="post" action="staff_edit_done.php">';
         print '<input type="hidden" name="code" value="' . $staff_code . '">';
         print '<input type="hidden" name="name" value="' . $staff_name . '">';
-        // FIXME: セキュリティ問題: 直接 staff_add_done.phpにアクセスすると悪意ある文字列をDBに書き込み可能。
         print '<input type="hidden" name="pass" value="' . $staff_pass . '">';
         print '<br />';
         print '<input type="button" onclick="history.back()" value="戻る">';

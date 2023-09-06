@@ -1,6 +1,21 @@
-# Sample PHP Project
+# Sample LAMP
 
 This project is based on "気づけばプロ並みPHP 改訂版--ゼロから作れる人になる!".
+
+There are a lot of vulnerabilities in this website. Therefore, do not use these codes on its own.
+
+I will not fix those vulnerabilities because I want to give my all to TypeScript projects.
+
+## 👌 Known Issues and checkpoints
+
+- [ ] XSS using uploading images.
+- [ ] CSRF.
+- [ ] Mail header injection due to no check of "new line".
+
+### Reference
+
+- https://blog.tokumaru.org/2014/01/php.html
+- https://blog.tokumaru.org/2007/12/image-xss-summary.html#p01
 
 ## 💻 Tech Stack
 
