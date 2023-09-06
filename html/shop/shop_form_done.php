@@ -164,7 +164,7 @@ session_regenerate_id(true);
 
 		print '<br />';
 		print nl2br($main_text);
-		// MEMO: No need to send email
+		// MEMO: No sending e-mails on this project
 		// FIXME: メールヘッダーインジェクション 改行チェックなしのため
 		// $title = 'ご注文ありがとうございます。';
 		// $header = 'From:info@rokumarunouen.co.jp';

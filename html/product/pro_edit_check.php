@@ -29,7 +29,7 @@ if (isset($_SESSION['login']) == false) {
 	$pro_image_name_old = $post['image_name_old'];
 
 	$product_image = $_FILES['image'];
-	// FIXME: 商品画像ファイル名のバリデーション
+	$is_valid = true;
 
 	if ($pro_name == '') {
 		print '商品名が入力されていません。<br />';
@@ -41,6 +41,7 @@ if (isset($_SESSION['login']) == false) {
 
 	if (preg_match('/\A[0-9]+\z/', $pro_price) == 0) {
 		print '価格をきちんと入力してください。<br />';
+		$is_valid = false;
 	} else {
 		print '価格:';
 		print $pro_price;
@@ -52,6 +53,10 @@ if (isset($_SESSION['login']) == false) {
 	if ($product_image['size'] > 0) {
 		if ($product_image['size'] > 1000000) {
 			print '画像が大き過ぎます';
+			$is_valid = false;
+		} elseif (!preg_match('/\.jpg$|\.jpeg$/i', $product_image_name)) {
+			print '正しい拡張子のファイルをアップロードしてください。<br />';
+			$is_valid = false;
 		} else {
 			move_uploaded_file($product_image['tmp_name'], './image/' . $product_image_name);
 			print '<img src="./image/' . $product_image_name . '">';
@@ -59,11 +64,7 @@ if (isset($_SESSION['login']) == false) {
 		}
 	}
 
-	if ($pro_name == '' || preg_match('/\A[0-9]+\z/', $pro_price) == 0 || $product_image['size'] > 1000000) {
-		print '<form>';
-		print '<input type="button" onclick="history.back()" value="戻る">';
-		print '</form>';
-	} else {
+	if ($is_valid) {
 		print '上記のように変更します。<br />';
 		print '<form method="post" action="pro_edit_done.php">';
 		print '<input type="hidden" name="code" value="' . $pro_code . '">';
@@ -74,6 +75,10 @@ if (isset($_SESSION['login']) == false) {
 		print '<br />';
 		print '<input type="button" onclick="history.back()" value="戻る">';
 		print '<input type="submit" value="OK">';
+		print '</form>';
+	} else {
+		print '<form>';
+		print '<input type="button" onclick="history.back()" value="戻る">';
 		print '</form>';
 	}
 	?>
