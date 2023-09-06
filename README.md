@@ -79,6 +79,8 @@ mkdir image
 sudo chmod -R 777 image
 ```
 
+Database initial setups
+
 ```sql
 use sample-db;
 CREATE TABLE mst_staff (
@@ -127,4 +129,10 @@ tel VARCHAR(13),
 sex INT,
 birthyear INT
 );
+```
+
+Apache2 Configurations
+
+```bash
+docker exec -it php cat /etc/apache2/apache2.conf > php/conf/apache2.conf
 ```
