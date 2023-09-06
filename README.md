@@ -1,5 +1,7 @@
 # Sample PHP Project
 
+This project is based on "気づけばプロ並みPHP 改訂版--ゼロから作れる人になる!".
+
 ## 💻 Tech Stack
 
 **Language** - [PHP 7.2](https://www.php.net/)  
