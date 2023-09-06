@@ -12,7 +12,7 @@
 
 	require_once('../common/sanitize.php');
 
-	$post = sanitize($_POST);
+	$post = sanitize_all($_POST);
 
 	$name = $post['name'];
 	$email = $post['email'];

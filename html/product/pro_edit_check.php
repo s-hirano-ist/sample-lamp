@@ -22,13 +22,14 @@ if (isset($_SESSION['login']) == false) {
 <body>
 	<?php
 	require_once('../common/sanitize.php');
-	$post = sanitize($_POST);
+	$post = sanitize_all($_POST);
 	$pro_code = $post['code'];
 	$pro_name = $post['name'];
 	$pro_price = $post['price'];
 	$pro_image_name_old = $post['image_name_old'];
 
 	$product_image = $_FILES['image'];
+	$is_valid = true;
 
 	if ($pro_name == '') {
 		print '商品名が入力されていません。<br />';
@@ -40,37 +41,44 @@ if (isset($_SESSION['login']) == false) {
 
 	if (preg_match('/\A[0-9]+\z/', $pro_price) == 0) {
 		print '価格をきちんと入力してください。<br />';
+		$is_valid = false;
 	} else {
 		print '価格:';
 		print $pro_price;
 		print '円<br />';
 	}
 
+	$product_image_name = sanitize($_FILES['image']['name']);
+
 	if ($product_image['size'] > 0) {
 		if ($product_image['size'] > 1000000) {
 			print '画像が大き過ぎます';
+			$is_valid = false;
+		} elseif (!preg_match('/\.jpg$|\.jpeg$/i', $product_image_name)) {
+			print '正しい拡張子のファイルをアップロードしてください。<br />';
+			$is_valid = false;
 		} else {
-			move_uploaded_file($product_image['tmp_name'], './image/' . $product_image['name']);
-			print '<img src="./image/' . $product_image['name'] . '">';
+			move_uploaded_file($product_image['tmp_name'], './image/' . $product_image_name);
+			print '<img src="./image/' . $product_image_name . '">';
 			print '<br />';
 		}
 	}
 
-	if ($pro_name == '' || preg_match('/\A[0-9]+\z/', $pro_price) == 0 || $product_image['size'] > 1000000) {
-		print '<form>';
-		print '<input type="button" onclick="history.back()" value="戻る">';
-		print '</form>';
-	} else {
+	if ($is_valid) {
 		print '上記のように変更します。<br />';
 		print '<form method="post" action="pro_edit_done.php">';
 		print '<input type="hidden" name="code" value="' . $pro_code . '">';
 		print '<input type="hidden" name="name" value="' . $pro_name . '">';
 		print '<input type="hidden" name="price" value="' . $pro_price . '">';
 		print '<input type="hidden" name="image_name_old" value="' . $pro_image_name_old . '">';
-		print '<input type="hidden" name="image_name" value="' . $product_image['name'] . '">';
+		print '<input type="hidden" name="image_name" value="' . $product_image_name . '">';
 		print '<br />';
 		print '<input type="button" onclick="history.back()" value="戻る">';
 		print '<input type="submit" value="OK">';
+		print '</form>';
+	} else {
+		print '<form>';
+		print '<input type="button" onclick="history.back()" value="戻る">';
 		print '</form>';
 	}
 	?>

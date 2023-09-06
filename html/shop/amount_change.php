@@ -4,7 +4,7 @@ session_regenerate_id(true);
 
 require_once('../common/sanitize.php');
 
-$post = sanitize($_POST);
+$post = sanitize_all($_POST);
 
 $max = $post['max'];
 for ($i = 0; $i < $max; $i++) {

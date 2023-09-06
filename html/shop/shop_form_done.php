@@ -17,7 +17,7 @@ session_regenerate_id(true);
 	try {
 		require_once('../common/sanitize.php');
 
-		$post = sanitize($_POST);
+		$post = sanitize_all($_POST);
 
 		$name = $post['name'];
 		$email = $post['email'];
@@ -164,8 +164,8 @@ session_regenerate_id(true);
 
 		print '<br />';
 		print nl2br($main_text);
-		// MEMO: No need to send email
-		// FIXME: メールヘッダーインジェクション 改行チェックなしのため
+		// MEMO: No sending e-mails on this project.
+		// FIXME: mail header injection.
 		// $title = 'ご注文ありがとうございます。';
 		// $header = 'From:info@rokumarunouen.co.jp';
 		// $main_text = html_entity_decode($main_text, ENT_QUOTES, 'UTF-8');
@@ -187,7 +187,7 @@ session_regenerate_id(true);
 	?>
 	<br />
 	<a href="shop_list.php">商品画面へ</a>
-	<!-- TODO: 注文が完了したらショッピングカートを空にする -->
+	<!-- TODO: delete all when order is done. -->
 
 </body>
 

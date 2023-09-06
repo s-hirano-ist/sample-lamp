@@ -30,7 +30,7 @@ if (isset($_SESSION['login']) == false) {
 
 		$sql = 'DELETE FROM mst_product WHERE code=?';
 		$data[] = $pro_code;
-		$stmt = executeSqlWithData($sql, $sql, $data);
+		$stmt = executeSqlWithData($sql, $dbh, $data);
 		$dbh = null;
 
 		if ($pro_image_name != "") {

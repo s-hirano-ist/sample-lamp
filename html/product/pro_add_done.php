@@ -23,7 +23,7 @@ if (isset($_SESSION['login']) == false) {
 	<?php
 	try {
 		require_once('../common/sanitize.php');
-		$post = sanitize($_POST);
+		$post = sanitize_all($_POST);
 		$pro_name = $post['name'];
 		$pro_price = $post['price'];
 		$pro_image_name = $post['image_name'];
@@ -31,7 +31,6 @@ if (isset($_SESSION['login']) == false) {
 		require_once('../common/database.php');
 		$dbh = connectToDatabase();
 
-		// FIXME: スクリプト実行脆弱性あり https://blog.tokumaru.org/2014/01/php.html
 		$sql = 'INSERT INTO mst_product(name,price, image_path) VALUES (?,?,?)';
 		$data[] = $pro_name;
 		$data[] = $pro_price;

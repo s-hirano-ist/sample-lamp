@@ -22,8 +22,9 @@ if (isset($_SESSION['login']) == false) {
 <body>
     <?php
     try {
+        // FIXME: CSRF if access directly to this page.
         require_once('../common/sanitize.php');
-        $post = sanitize($_POST);
+        $post = sanitize_all($_POST);
 
         $staff_code = $post['code'];
         $staff_name = $post['name'];
