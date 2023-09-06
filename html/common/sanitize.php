@@ -1,9 +1,14 @@
 <?php
 
-function sanitize($before)
+function sanitize_all($list)
 {
-	foreach ($before as $key => $value) {
-		$after[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+	foreach ($list as $key => $value) {
+		$after[$key] = sanitize($value);
 	}
 	return $after;
+}
+
+function sanitize($string)
+{
+	return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }

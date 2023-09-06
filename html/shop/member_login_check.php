@@ -4,7 +4,7 @@ try {
 
 	require_once('../common/sanitize.php');
 
-	$post = sanitize($_POST);
+	$post = sanitize_all($_POST);
 	$member_email = $post['email'];
 	$member_pass = $post['pass'];
 

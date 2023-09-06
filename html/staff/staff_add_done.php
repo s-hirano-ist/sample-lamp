@@ -24,7 +24,7 @@ if (isset($_SESSION['login']) == false) {
     try {
 
         require_once('../common/sanitize.php');
-        $post = sanitize($_POST);
+        $post = sanitize_all($_POST);
         $staff_name = $post['name'];
         $staff_pass = $post['pass'];
 
