@@ -42,7 +42,7 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 ```
 
-REF: https://getcomposer.org/download/
+> https://getcomposer.org/download/
 
 3. Install packages
 
@@ -135,4 +135,19 @@ Apache2 Configurations
 
 ```bash
 docker exec -it php cat /etc/apache2/apache2.conf > php/conf/apache2.conf
+```
+
+## Hints
+
+### 配列の中身を画面に出力
+
+```php
+var_dump($cart);
+exit();
+```
+
+### 改行等を変換
+
+```php
+print nl2br($csv);
 ```
