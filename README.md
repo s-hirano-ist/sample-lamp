@@ -14,8 +14,9 @@ I will not fix those vulnerabilities because I want to give my all to TypeScript
 
 ### Reference
 
-- https://blog.tokumaru.org/2014/01/php.html
-- https://blog.tokumaru.org/2007/12/image-xss-summary.html#p01
+> https://blog.tokumaru.org/2014/01/php.html
+> 
+> https://blog.tokumaru.org/2007/12/image-xss-summary.html#p01
 
 ## 💻 Tech Stack
 
