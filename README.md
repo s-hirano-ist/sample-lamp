@@ -1,4 +1,4 @@
-# Sample LAMP
+# Sample LAMP Project
 
 This project is based on "気づけばプロ並みPHP 改訂版--ゼロから作れる人になる!".
 
